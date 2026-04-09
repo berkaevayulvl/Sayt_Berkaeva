@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="120" x2="680" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="0.45" stop-color="#1A1030"/>
+      <stop offset="1" stop-color="#101322"/>
+    </linearGradient>
+    <linearGradient id="g" x1="120" y1="240" x2="700" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#25F3D3" stop-opacity="0.30"/>
+      <stop offset="0.55" stop-color="#A855F7" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#FF3DA6" stop-opacity="0.22"/>
+    </linearGradient>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="220" cy="260" r="220" fill="url(#g)" filter="url(#blur)"/>
+  <circle cx="590" cy="310" r="190" fill="rgba(37,243,211,0.18)" filter="url(#blur)"/>
+  <circle cx="440" cy="760" r="260" fill="rgba(255,61,166,0.14)" filter="url(#blur)"/>
+  <rect x="70" y="70" width="660" height="860" rx="44" stroke="rgba(255,255,255,0.14)"/>
+  <g opacity="0.92">
+    <text x="90" y="820" fill="rgba(255,255,255,0.82)" font-family="Outfit, Manrope, Arial" font-size="40" font-weight="600">
+      $>B>
+    </text>
+    <text x="90" y="870" fill="rgba(255,255,255,0.62)" font-family="Manrope, Arial" font-size="22">
+      0<5=8B5 =0 «$>B> 5@:0520.png»
+    </text>
+  </g>
+</svg>

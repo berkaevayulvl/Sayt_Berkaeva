@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Юлия Беркаева — Web & AI</title>
+    <meta
+      name="description"
+      content="Портфолио Юлии Беркаевой: нейросети, обучение, внедрение, вайб‑кодинг и digital‑проекты."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="silk-bg" aria-hidden="true"></div>
+    <canvas id="color-bends" aria-hidden="true"></canvas>
+
+    <a class="corner-mark cursor-target" href="#top" aria-label="Наверх">
+      <img src="ЮБ.png" alt="" />
+    </a>
+
+    <button class="theme-toggle cursor-target" type="button" data-theme-toggle aria-label="Переключить тему">
+      <span class="theme-toggle__dot" aria-hidden="true"></span>
+      <span class="theme-toggle__text" aria-hidden="true">Тема</span>
+    </button>
+
+    <header class="header">
+      <div class="container header__inner">
+        <a class="brand cursor-target" href="#top">Юлия Беркаева</a>
+
+        <button class="burger cursor-target" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav">
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav class="nav" id="site-nav" aria-label="Навигация">
+          <a class="nav__link cursor-target" href="#directions">2 направления</a>
+          <a class="nav__link cursor-target" href="#ai">Нейросети</a>
+          <a class="nav__link cursor-target" href="#vibe">Вайб‑кодинг</a>
+          <a class="nav__link cursor-target" href="#projects">Проекты</a>
+          <a class="nav__link nav__cta cursor-target" href="#contact">Связаться</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero__grid">
+          <div class="hero__copy" data-animate>
+            <div class="hero__kicker">Вайб‑кодер / Портфолио / Web & AI‑проекты</div>
+            <h1 class="hero__title">
+              <span class="gradient-text"
+                >Я делаю сайты, интерфейсы и digital‑проекты, которые выглядят как вайб, а работают как система</span
+              >
+            </h1>
+            <p class="hero__lead">
+              Не просто «что‑то сверстать», а собрать ощущение, стиль, логику и подачу так, чтобы проект хотелось открыть,
+              листать и запомнить.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--primary cursor-target" href="#projects">Посмотреть проекты</a>
+              <a class="btn btn--ghost cursor-target" href="#contact">Обсудить задачу</a>
+            </div>
+            <div class="tag-row" aria-label="Теги">
+              <span class="tag">Веб · UX · визуальный ритм</span>
+              <span class="tag">AI‑first подход</span>
+              <span class="tag">Самара · онлайн</span>
+            </div>
+          </div>
+
+          <div class="hero__visual" data-animate>
+            <div class="portrait" data-tilt>
+              <img src="Фото Беркаева.png" alt="Фото Юлии Беркаевой" />
+              <div class="portrait__orbs" aria-hidden="true"></div>
+            </div>
+            <div class="glass-card hero__card" data-animate>
+              <div class="glass-card__label">Подход</div>
+              <div class="glass-card__title">вкус · структура · скорость</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section directions" id="directions">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Два направления — один стиль мышления</h2>
+            <p class="muted">ИИ — чтобы ускорять и систематизировать. Вайб‑кодинг — чтобы делать подачу и интерфейсы живыми.</p>
+          </div>
+
+          <div class="grid-2">
+            <a class="glass-card link-card cursor-target" href="#ai" data-animate>
+              <div class="link-card__num">01</div>
+              <div class="link-card__title">Нейросети для задач и процессов</div>
+              <div class="link-card__text">Обучение, внедрение, автоматизация…</div>
+              <div class="link-card__cta">Перейти к нейросетям</div>
+            </a>
+            <a class="glass-card link-card cursor-target" href="#vibe" data-animate>
+              <div class="link-card__num">02</div>
+              <div class="link-card__title">Вайб‑кодинг: сайты и интерфейсы</div>
+              <div class="link-card__text">Собираю впечатление — и довожу до работающей системы.</div>
+              <div class="link-card__cta">Перейти к вайб‑кодингу</div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ai" id="ai">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Нейросети: обучение, внедрение, прототипы</h2>
+            <p class="muted">Для частных клиентов и компаний — без «магии», с понятными шагами, результатом и передачей знаний.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="glass-card" data-animate>
+              <h3 class="h3">Физические лица и самозанятые</h3>
+              <ul class="list">
+                <li>Индивидуальные консультации по ChatGPT, Claude, Midjourney и др.</li>
+                <li>Обучение вайбкодингу: от промптов до мини‑приложений</li>
+                <li>Подбор стека под профессию (текст, дизайн, аналитика)</li>
+                <li>Помощь в оформлении портфолио и резюме с ИИ</li>
+              </ul>
+            </article>
+            <article class="glass-card" data-animate>
+              <h3 class="h3">Юридические лица</h3>
+              <ul class="list">
+                <li>Аудит процессов и точек внедрения ИИ</li>
+                <li>Корпоративные воркшопы и программы грамотности</li>
+                <li>Прототипирование внутренних инструментов (боты, интеграции)</li>
+                <li>Сопровождение пилотов и передача регламентов</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section works" id="works">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Избранные работы (нейросети)</h2>
+            <p class="muted">Детали некоторых проектов — с учётом NDA.</p>
+          </div>
+
+          <div class="cards-4">
+            <article class="glass-card work-card" data-animate>
+              <div class="badge">Обучение</div>
+              <h3 class="h3">Курс для маркетологов</h3>
+            </article>
+            <article class="glass-card work-card" data-animate>
+              <div class="badge">Автоматизация</div>
+              <h3 class="h3">Бот для заявок</h3>
+            </article>
+            <article class="glass-card work-card" data-animate>
+              <div class="badge">Вайбкодинг</div>
+              <h3 class="h3">Внутренний дашборд</h3>
+            </article>
+            <article class="glass-card work-card" data-animate>
+              <div class="badge">Стратегия</div>
+              <h3 class="h3">Дорожная карта ИИ</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section vibe" id="vibe">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Вайб‑кодинг: портфолио и digital‑подача</h2>
+            <p class="muted">Я не просто пишу код — я собираю впечатление и делаю его понятным пользователю.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="glass-card" data-animate>
+              <h3 class="h3">Я не просто пишу код — я собираю впечатление</h3>
+              <p class="muted">
+                Это стык кода, визуала, UX и AI‑инструментов: чтобы проект смотрелся цельно, быстро читался и уверенно вёл к действию.
+              </p>
+              <ul class="list">
+                <li>лендинги, портфолио, промо‑страницы</li>
+                <li>интерфейсы, спецпроекты, digital‑концепты</li>
+                <li>AI‑first сайты и продукты</li>
+              </ul>
+            </article>
+
+            <article class="glass-card steps" data-animate>
+              <h3 class="h3">Как я работаю</h3>
+              <ol class="steps__list">
+                <li><span class="steps__num">01</span><span class="steps__text">Сначала вайб — ощущение, подача, ритм.</span></li>
+                <li><span class="steps__num">02</span><span class="steps__text">Потом структура — логика, блоки, сценарии.</span></li>
+                <li><span class="steps__num">03</span><span class="steps__text">Потом реализация — чисто, быстро, проверяемо.</span></li>
+              </ol>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects" id="projects">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Избранные проекты (вайб‑кодинг)</h2>
+            <p class="muted">Про скорость восприятия, визуальный ритм и аккуратный CTA.</p>
+          </div>
+
+          <div class="cards-4">
+            <article class="glass-card project-card" data-animate>
+              <div class="badge">AI Landing Experience</div>
+              <h3 class="h3">Лендинг для digital‑продукта</h3>
+            </article>
+            <article class="glass-card project-card" data-animate>
+              <div class="badge">Portfolio</div>
+              <h3 class="h3">Portfolio for Creative Expert</h3>
+            </article>
+            <article class="glass-card project-card" data-animate>
+              <div class="badge">Funnel</div>
+              <h3 class="h3">Bot & Funnel Page</h3>
+            </article>
+            <article class="glass-card project-card" data-animate>
+              <div class="badge">Concept</div>
+              <h3 class="h3">Concept Site for AI Creator</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="manifesto">
+        <div class="container" data-animate>
+          <blockquote class="quote">
+            Хороший сайт — это не когда «нормально сверстано». Это когда есть ощущение, смысл и ритм — и всё работает как система.
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="section diagnostic" id="diagnostic">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Диагностика запроса (нейросети)</h2>
+            <p class="muted">Пять вопросов — и ориентир по услугам, формату и первому шагу.</p>
+          </div>
+
+          <div id="diagnostic-app" class="glass-card" data-animate></div>
+        </div>
+      </section>
+
+      <section class="section reviews" id="reviews">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Отзывы</h2>
+            <p class="muted">Коротко и по делу — про процесс, ясность и результат.</p>
+          </div>
+
+          <div class="grid-3">
+            <figure class="glass-card review" data-animate>
+              <blockquote>«Очень структурно: стало понятно, что делать и как внедрять ИИ без хаоса.»</blockquote>
+              <figcaption>Мария · эксперт в образовании</figcaption>
+            </figure>
+            <figure class="glass-card review" data-animate>
+              <blockquote>«Подача и UX — сильные. Плюс скорость: быстро собрали концепт и довели до результата.»</blockquote>
+              <figcaption>Андрей · руководитель продукта</figcaption>
+            </figure>
+            <figure class="glass-card review" data-animate>
+              <blockquote>«Без воды: помогла выбрать инструменты, собрать сценарии и получить понятный план внедрения.»</blockquote>
+              <figcaption>Елена · собственник малого бизнеса</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Сотрудничество и партнёрство</h2>
+            <p class="muted">
+              Коротко опишите задачу. Для юрлиц — договор, безнал, документы. Ответ обычно в течение 1–2 рабочих дней.
+            </p>
+          </div>
+
+          <div class="grid-2">
+            <div class="glass-card" data-animate>
+              <ul class="list">
+                <li><strong>Локация:</strong> Самара · онлайн по РФ</li>
+                <li><strong>Ответ:</strong> 1–2 рабочих дня</li>
+              </ul>
+            </div>
+
+            <div class="glass-card contact-card" data-animate>
+              <div class="muted">Напишите в Telegram или на почту — так быстрее всего.</div>
+              <div class="contact-card__links">
+                <a class="cursor-target" href="mailto:BerkaevaYulVl@gmail.com">BerkaevaYulVl@gmail.com</a>
+                <a class="cursor-target" href="https://t.me/Yuliya_Berkaeva" target="_blank" rel="noreferrer">Telegram</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>© Юлия Беркаева</div>
+        <div class="muted">Нейросети · вайбкодинг · образование и внедрение ИИ</div>
+      </div>
+    </footer>
+
+    <div class="cursor" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
