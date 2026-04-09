@@ -979,6 +979,90 @@ function initStarDust() {
   requestAnimationFrame(draw);
 }
 
+function initCardSpringHover() {
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (reduce || !finePointer) return;
+  if (typeof window.gsap === "undefined") return;
+
+  const gsap = window.gsap;
+  const cards = Array.from(document.querySelectorAll(".glass-card"));
+  if (cards.length === 0) return;
+
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+  for (const el of cards) {
+    let raf = 0;
+    const state = { rx: 0, ry: 0, px: 0, py: 0 };
+
+    const apply = () => {
+      raf = 0;
+      el.style.setProperty("--rx", state.rx.toFixed(2));
+      el.style.setProperty("--ry", state.ry.toFixed(2));
+      el.style.setProperty("--px", state.px.toFixed(2));
+      el.style.setProperty("--py", state.py.toFixed(2));
+    };
+
+    const onMove = (e) => {
+      const r = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+      const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+
+      // border glow follows cursor
+      const hx = ((e.clientX - r.left) / r.width) * 100;
+      const hy = ((e.clientY - r.top) / r.height) * 100;
+      el.style.setProperty("--hx", `${clamp(hx, 0, 100).toFixed(1)}%`);
+      el.style.setProperty("--hy", `${clamp(hy, 0, 100).toFixed(1)}%`);
+
+      // rotation + content parallax
+      const maxRot = 6.5;
+      const maxPar = 4.5;
+      const target = {
+        rx: clamp(dx * maxRot, -maxRot, maxRot),
+        ry: clamp(dy * maxRot, -maxRot, maxRot),
+        px: clamp(dx * maxPar, -maxPar, maxPar),
+        py: clamp(dy * maxPar, -maxPar, maxPar),
+      };
+
+      gsap.to(state, {
+        ...target,
+        duration: 0.55,
+        ease: "elastic.out(1, 0.35)",
+        overwrite: "auto",
+        onUpdate: () => {
+          if (!raf) raf = requestAnimationFrame(apply);
+        },
+      });
+    };
+
+    const onEnter = () => {
+      gsap.to(el, { scale: 1.01, duration: 0.28, ease: "power3.out", overwrite: "auto" });
+    };
+
+    const onLeave = () => {
+      el.style.setProperty("--hx", "50%");
+      el.style.setProperty("--hy", "50%");
+      gsap.to(state, {
+        rx: 0,
+        ry: 0,
+        px: 0,
+        py: 0,
+        duration: 0.7,
+        ease: "elastic.out(1, 0.28)",
+        overwrite: "auto",
+        onUpdate: () => {
+          if (!raf) raf = requestAnimationFrame(apply);
+        },
+      });
+      gsap.to(el, { scale: 1, duration: 0.35, ease: "power3.out", overwrite: "auto" });
+    };
+
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initMobileMenu();
@@ -990,6 +1074,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initStarDust();
   initScrollSpy();
   initMagneticButtons();
+  initCardSpringHover();
   initDiagnosticQuiz();
 });
 
