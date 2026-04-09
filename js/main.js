@@ -979,6 +979,125 @@ function initStarDust() {
   requestAnimationFrame(draw);
 }
 
+function initSplashCursor() {
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canvas = document.getElementById("fluid");
+  if (!canvas) return;
+
+  const isTouch = "ontouchstart" in window || (navigator.maxTouchPoints || 0) > 0;
+  if (reduce || isTouch) {
+    canvas.style.display = "none";
+    return;
+  }
+
+  const ctx = canvas.getContext("2d", { alpha: true });
+  if (!ctx) return;
+
+  let w = 0;
+  let h = 0;
+  let dpr = 1;
+
+  const resize = () => {
+    dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    w = window.innerWidth || 1;
+    h = window.innerHeight || 1;
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  resize();
+  window.addEventListener("resize", resize);
+
+  // “дорого‑богато” палитра
+  const palette = [
+    { r: 41, g: 245, b: 255 }, // cyan
+    { r: 255, g: 47, b: 200 }, // hot pink
+    { r: 255, g: 194, b: 75 }, // gold
+  ];
+
+  const splats = [];
+  const maxSplats = 90;
+
+  const addSplat = (x, y, vx, vy, power = 1) => {
+    const c = palette[(Math.random() * palette.length) | 0];
+    splats.push({
+      x,
+      y,
+      vx,
+      vy,
+      r: 40 + Math.random() * 110 * power,
+      a: 0.08 + Math.random() * 0.22 * power,
+      life: 1,
+      c,
+    });
+    while (splats.length > maxSplats) splats.shift();
+  };
+
+  let last = null;
+  const onMove = (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    if (!last) last = { x, y, t: performance.now() };
+    const dx = x - last.x;
+    const dy = y - last.y;
+    const v = Math.min(1.8, Math.hypot(dx, dy) / 22);
+    addSplat(x, y, dx, dy, v);
+    last = { x, y, t: performance.now() };
+  };
+
+  window.addEventListener("pointermove", onMove, { passive: true });
+  window.addEventListener(
+    "pointerdown",
+    (e) => {
+      for (let i = 0; i < 6; i++) addSplat(e.clientX, e.clientY, (Math.random() - 0.5) * 120, (Math.random() - 0.5) * 120, 1.2);
+    },
+    { passive: true },
+  );
+
+  // soft blur pass using shadow + additive
+  const fade = 0.08; // higher = faster dissipate
+  const step = () => {
+    // fade previous frame
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = `rgba(0,0,0,${fade})`;
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.globalCompositeOperation = "lighter";
+    for (const s of splats) {
+      s.life *= 0.965;
+      s.x += s.vx * 0.06;
+      s.y += s.vy * 0.06;
+      s.vx *= 0.92;
+      s.vy *= 0.92;
+
+      const a = s.a * s.life;
+      if (a < 0.003) continue;
+
+      // glow blob
+      ctx.beginPath();
+      ctx.shadowBlur = 26;
+      ctx.shadowColor = `rgba(${s.c.r},${s.c.g},${s.c.b},${Math.min(0.35, a * 2)})`;
+      ctx.fillStyle = `rgba(${s.c.r},${s.c.g},${s.c.b},${a})`;
+      ctx.arc(s.x, s.y, s.r * (0.55 + 0.55 * (1 - s.life)), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+
+    // cleanup
+    for (let i = splats.length - 1; i >= 0; i--) {
+      if (splats[i].life < 0.02) splats.splice(i, 1);
+    }
+
+    requestAnimationFrame(step);
+  };
+
+  // initialize canvas with transparent black
+  ctx.clearRect(0, 0, w, h);
+  requestAnimationFrame(step);
+}
+
 function initCardSpringHover() {
   const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -1072,6 +1191,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSilkStrands();
   initColorBendsWebGL();
   initStarDust();
+  initSplashCursor();
   initScrollSpy();
   initMagneticButtons();
   initCardSpringHover();
