@@ -347,6 +347,24 @@ html[data-theme="light"] .brand__logo {
   pointer-events: none;
 }
 
+@keyframes breatheGlow {
+  0% {
+    filter: saturate(1.0) brightness(1.0);
+    opacity: 0.78;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    filter: saturate(1.18) brightness(1.06);
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.03);
+  }
+  100% {
+    filter: saturate(1.0) brightness(1.0);
+    opacity: 0.78;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 .glass-card {
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -356,6 +374,8 @@ html[data-theme="light"] .brand__logo {
   backdrop-filter: blur(18px);
   position: relative;
   overflow: hidden;
+  transition: box-shadow 240ms ease, transform 240ms ease;
+  will-change: transform, box-shadow;
 }
 
 .glass-card::before {
@@ -367,6 +387,7 @@ html[data-theme="light"] .brand__logo {
     radial-gradient(700px 280px at 84% 10%, rgba(168, 85, 247, 0.085), transparent 58%),
     radial-gradient(700px 380px at 70% 90%, rgba(255, 61, 166, 0.07), transparent 62%);
   opacity: 0.95;
+  transform-origin: 50% 50%;
 }
 
 .glass-card::after {
@@ -387,6 +408,32 @@ html[data-theme="light"] .brand__logo {
 
 .glass-card:hover {
   box-shadow: 0 26px 86px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(37, 243, 211, 0.08) inset;
+  transform: translateY(-1px);
+}
+
+/* “Дышащая” подсветка по всему сайту */
+@media (prefers-reduced-motion: no-preference) {
+  .glass-card::before {
+    animation: breatheGlow 6.6s ease-in-out infinite;
+  }
+
+  .glass-card:nth-child(2n)::before {
+    animation-duration: 7.4s;
+    animation-delay: -1.6s;
+  }
+
+  .glass-card:nth-child(3n)::before {
+    animation-duration: 8.1s;
+    animation-delay: -2.4s;
+  }
+
+  .glass-card:hover::before {
+    animation-duration: 4.2s;
+  }
+
+  .btn--primary {
+    box-shadow: 0 18px 60px rgba(37, 243, 211, 0.1), 0 18px 60px rgba(168, 85, 247, 0.1), var(--shadow-soft);
+  }
 }
 
 .glass-card__label {
@@ -601,21 +648,6 @@ html[data-theme="light"] .footer {
   transform: translateY(0);
 }
 
-.cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  pointer-events: none;
-  z-index: 70;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.06);
-  transform: translate(-50%, -50%);
-  opacity: 0;
-}
-
 body.has-custom-cursor {
   cursor: none;
 }
@@ -623,6 +655,65 @@ body.has-custom-cursor {
 body.has-custom-cursor a,
 body.has-custom-cursor button {
   cursor: none;
+}
+
+.target-cursor-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.target-cursor-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.target-cursor-corner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border: 3px solid #fff;
+  will-change: transform;
+}
+
+.corner-tl {
+  transform: translate(-150%, -150%);
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  transform: translate(50%, -150%);
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-br {
+  transform: translate(50%, 50%);
+  border-left: none;
+  border-top: none;
+}
+
+.corner-bl {
+  transform: translate(-150%, 50%);
+  border-right: none;
+  border-top: none;
 }
 
 /* Diagnostic app */
