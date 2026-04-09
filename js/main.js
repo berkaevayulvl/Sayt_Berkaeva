@@ -815,6 +815,170 @@ function initDiagnosticQuiz() {
   render();
 }
 
+function initMagneticButtons() {
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (reduce || !finePointer) return;
+  if (typeof window.gsap === "undefined") return;
+
+  const gsap = window.gsap;
+
+  const strength = 10; // px
+  const targets = Array.from(document.querySelectorAll(".btn, .nav__link.nav__cta"));
+
+  for (const el of targets) {
+    const onMove = (e) => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width / 2);
+      const y = e.clientY - (r.top + r.height / 2);
+      const mx = (x / (r.width / 2)) * strength;
+      const my = (y / (r.height / 2)) * strength;
+      el.classList.add("is-magnetic");
+      el.style.setProperty("--mx", `${mx.toFixed(2)}px`);
+      el.style.setProperty("--my", `${my.toFixed(2)}px`);
+    };
+
+    const onLeave = () => {
+      el.classList.remove("is-magnetic");
+      gsap.to(el, {
+        duration: 0.35,
+        ease: "power3.out",
+        onUpdate: () => {
+          el.style.setProperty("--mx", "0px");
+          el.style.setProperty("--my", "0px");
+        },
+        onComplete: () => {
+          el.style.setProperty("--mx", "0px");
+          el.style.setProperty("--my", "0px");
+        },
+      });
+    };
+
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+  }
+}
+
+function initScrollSpy() {
+  const navLinks = Array.from(document.querySelectorAll(".nav__link[href^=\"#\"]"));
+  if (navLinks.length === 0) return;
+
+  const linkById = new Map();
+  for (const a of navLinks) {
+    const hash = a.getAttribute("href") || "";
+    const id = hash.startsWith("#") ? hash.slice(1) : "";
+    if (id) linkById.set(id, a);
+  }
+
+  const sections = Array.from(linkById.keys())
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  if (sections.length === 0) return;
+
+  const setActive = (id) => {
+    for (const a of navLinks) a.classList.remove("is-active");
+    const a = linkById.get(id);
+    if (a) a.classList.add("is-active");
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    // fallback: activate first
+    setActive(sections[0].id);
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]?.target?.id) setActive(visible[0].target.id);
+    },
+    { rootMargin: "-30% 0px -55% 0px", threshold: [0.06, 0.12, 0.18, 0.24] },
+  );
+
+  for (const s of sections) io.observe(s);
+}
+
+function initStarDust() {
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canvas = document.getElementById("star-dust");
+  if (!canvas) return;
+  if (reduce) {
+    canvas.style.display = "none";
+    return;
+  }
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const finePointer = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+
+  let w = 0;
+  let h = 0;
+  let dpr = 1;
+
+  const resize = () => {
+    dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    w = window.innerWidth || 1;
+    h = window.innerHeight || 1;
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  resize();
+  window.addEventListener("resize", resize);
+
+  const count = Math.round((w * h) / 42000); // sparse
+  const stars = Array.from({ length: Math.max(40, Math.min(160, count)) }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: 0.6 + Math.random() * 1.4,
+    a: 0.08 + Math.random() * 0.22,
+    s: 0.12 + Math.random() * 0.35,
+    p: Math.random() * Math.PI * 2,
+  }));
+
+  const pointer = { x: w * 0.5, y: h * 0.5, k: 0 };
+  if (finePointer) {
+    window.addEventListener("pointermove", (e) => {
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+      pointer.k = 1;
+    });
+  }
+
+  let t = 0;
+  const draw = () => {
+    t += 0.016;
+    ctx.clearRect(0, 0, w, h);
+
+    // very soft vignette lift
+    const vg = ctx.createRadialGradient(w * 0.5, h * 0.45, 0, w * 0.5, h * 0.45, Math.max(w, h) * 0.65);
+    vg.addColorStop(0, "rgba(255,255,255,0.02)");
+    vg.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, w, h);
+
+    for (const s of stars) {
+      const tw = 0.5 + 0.5 * Math.sin(t * s.s + s.p);
+      const ax = (pointer.x - w * 0.5) * 0.0006 * pointer.k;
+      const ay = (pointer.y - h * 0.5) * 0.0006 * pointer.k;
+
+      const x = s.x + ax * (20 * s.r);
+      const y = s.y + ay * (20 * s.r);
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,255,255,${(s.a * (0.7 + 0.6 * tw)).toFixed(3)})`;
+      ctx.arc(x, y, s.r * (0.85 + 0.35 * tw), 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  };
+  requestAnimationFrame(draw);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initMobileMenu();
@@ -823,6 +987,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initTargetCursor({ spinDuration: 2, hideDefaultCursor: true, parallaxOn: true, hoverDuration: 0.2 });
   initSilkStrands();
   initColorBendsWebGL();
+  initStarDust();
+  initScrollSpy();
+  initMagneticButtons();
   initDiagnosticQuiz();
 });
 
