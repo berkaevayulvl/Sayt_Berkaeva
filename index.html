@@ -22,10 +22,6 @@
     <div id="silk-bg" aria-hidden="true"></div>
     <canvas id="color-bends" aria-hidden="true"></canvas>
 
-    <a class="corner-mark cursor-target" href="#top" aria-label="Наверх">
-      <img src="ЮБ.png" alt="" />
-    </a>
-
     <button class="theme-toggle cursor-target" type="button" data-theme-toggle aria-label="Переключить тему">
       <span class="theme-toggle__dot" aria-hidden="true"></span>
       <span class="theme-toggle__text" aria-hidden="true">Тема</span>
@@ -33,7 +29,10 @@
 
     <header class="header">
       <div class="container header__inner">
-        <a class="brand cursor-target" href="#top">Юлия Беркаева</a>
+        <a class="brand cursor-target" href="#top" aria-label="Юлия Беркаева — на главную">
+          <img class="brand__logo" src="ЮБ.png" alt="Логотип" />
+          <span class="brand__text">Юлия Беркаева</span>
+        </a>
 
         <button class="burger cursor-target" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav">
           <span></span><span></span><span></span>
