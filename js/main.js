@@ -984,8 +984,8 @@ function initSplashCursor() {
   const canvas = document.getElementById("fluid");
   if (!canvas) return;
 
-  const isTouch = "ontouchstart" in window || (navigator.maxTouchPoints || 0) > 0;
-  if (reduce || isTouch) {
+  const finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (reduce || !finePointer) {
     canvas.style.display = "none";
     return;
   }
