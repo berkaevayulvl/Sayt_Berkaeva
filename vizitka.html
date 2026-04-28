@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Визитка — Юлия Беркаева</title>
+    <meta name="description" content="Короткая визитка: кто я, навыки, проекты, контакты." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        background: #fff;
+      }
+      .paper {
+        width: min(900px, calc(100% - 40px));
+        margin: 24px auto;
+        color: rgba(12, 12, 18, 0.92);
+      }
+      .paper .glass-card {
+        background: rgba(0, 0, 0, 0.03);
+        box-shadow: none;
+        border-color: rgba(12, 12, 18, 0.12);
+      }
+      .paper .muted {
+        color: rgba(12, 12, 18, 0.64);
+      }
+      .paper a {
+        color: rgba(12, 12, 18, 0.92);
+      }
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin-bottom: 12px;
+      }
+      .name {
+        font-family: Outfit, Manrope, system-ui, sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        font-size: 30px;
+        margin: 0;
+      }
+      .role {
+        margin: 6px 0 0;
+      }
+      .cols {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .kicker {
+        font-family: Outfit, Manrope, system-ui, sans-serif;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: rgba(12, 12, 18, 0.64);
+      }
+      .btn-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      @media print {
+        .btn-row {
+          display: none !important;
+        }
+        body {
+          margin: 0;
+        }
+        .paper {
+          margin: 0;
+          width: 100%;
+        }
+        .glass-card {
+          break-inside: avoid;
+        }
+      }
+      @media (max-width: 860px) {
+        .cols {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="paper">
+      <div class="topline">
+        <div>
+          <h1 class="name">Юлия Беркаева</h1>
+          <p class="muted role">Вайб‑кодинг · Web & AI · сайты, боты, автоматизация</p>
+          <div class="muted" style="font-size: 13px">Самара · онлайн</div>
+        </div>
+        <div class="glass-card" style="padding: 14px; min-width: min(360px, 100%)">
+          <div class="kicker">Контакты</div>
+          <div style="margin-top: 10px; display: grid; gap: 8px">
+            <div><strong>Telegram:</strong> <a href="https://t.me/Yuliya_Berkaeva" target="_blank" rel="noreferrer">@Yuliya_Berkaeva</a></div>
+            <div><strong>Почта:</strong> <a href="mailto:BerkaevaYulVl@gmail.com">BerkaevaYulVl@gmail.com</a></div>
+            <div><strong>Портфолио:</strong> <span class="muted">эта страница + сайт</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <section class="glass-card" style="padding: 16px">
+          <div class="kicker">Кто я</div>
+          <p style="margin: 10px 0 0" class="muted">
+            Выпускница курса по вайб‑кодингу. Делаю digital‑проекты с фокусом на впечатление, структуру и стабильную логику.
+          </p>
+
+          <div style="height: 12px"></div>
+          <div class="kicker">Что делаю</div>
+          <ul class="list" style="margin-top: 10px">
+            <li>лендинги и портфолио (структура, стиль, адаптив)</li>
+            <li>боты/ИИ‑агенты под задачу (заявки, напоминания, отчёты)</li>
+            <li>AI‑внедрение: сценарии, прототипы, автоматизация рутины</li>
+          </ul>
+
+          <div style="height: 12px"></div>
+          <div class="kicker">Навыки</div>
+          <ul class="list" style="margin-top: 10px">
+            <li>HTML/CSS/JS, адаптивная вёрстка</li>
+            <li>UX‑структура, тексты “для клиента”</li>
+            <li>микро‑анимации, интерактив</li>
+            <li>AI‑сценарии и прототипирование</li>
+          </ul>
+        </section>
+
+        <section class="glass-card" style="padding: 16px">
+          <div class="kicker">Проекты (примеры)</div>
+          <div style="display: grid; gap: 10px; margin-top: 10px">
+            <div class="glass-card" style="padding: 12px">
+              <div class="kicker">Лендинг</div>
+              <div style="font-weight: 700; margin-top: 6px">Водолазные работы — выезд 24/7</div>
+              <div class="muted" style="font-size: 13px; margin-top: 6px">
+                Задача: коммерческий лендинг с услугами/кейcами/ценами. Результат: структура + CTA + интерактив.
+              </div>
+              <div style="margin-top: 8px">
+                <a href="https://berkaevayulvl.github.io/Vodolaz-VC/" target="_blank" rel="noreferrer">Открыть демо</a>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px">
+              <div class="kicker">Игра</div>
+              <div style="font-weight: 700; margin-top: 6px">Тетрис — браузерная игра</div>
+              <div class="muted" style="font-size: 13px; margin-top: 6px">
+                Задача: интерактивный проект. Результат: стабильная логика + интерфейс + управление.
+              </div>
+              <div style="margin-top: 8px">
+                <a href="https://berkaevayulvl.github.io/game_new-/" target="_blank" rel="noreferrer">Играть</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn-like" type="button" onclick="window.print()">Сохранить как PDF (печать)</button>
+            <a class="btn-like" href="index.html">Открыть сайт</a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

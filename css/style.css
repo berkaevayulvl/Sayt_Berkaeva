@@ -1040,6 +1040,7 @@ body.has-custom-cursor button {
   background: rgba(0, 0, 0, 0.22);
   aspect-ratio: 16 / 9;
   display: grid;
+  position: relative;
 }
 
 .media-card__video {
@@ -1047,6 +1048,19 @@ body.has-custom-cursor button {
   height: 100%;
   display: block;
   object-fit: cover;
+}
+
+.video-firstframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-firstframe.is-hidden {
+  display: none;
 }
 
 .media-card__caption {

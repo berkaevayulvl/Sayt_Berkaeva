@@ -1346,6 +1346,79 @@ function initOfficeViewerLinks() {
   }
 }
 
+function initVideoFirstFramePosters() {
+  const videos = Array.from(document.querySelectorAll(".media-card__video"));
+  if (videos.length === 0) return;
+
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+
+  for (const video of videos) {
+    const host = video.closest(".media-card__frame");
+    if (!host) continue;
+
+    // We'll draw a tiny first-frame preview and overlay it as an <img>
+    const img = document.createElement("img");
+    img.className = "video-firstframe";
+    img.alt = "";
+    img.setAttribute("aria-hidden", "true");
+    host.insertBefore(img, video);
+
+    const hidePoster = () => img.classList.add("is-hidden");
+    const showPoster = () => img.classList.remove("is-hidden");
+
+    // Hide when playing, show again on ended/pause at start
+    video.addEventListener("play", hidePoster, { passive: true });
+    video.addEventListener("pause", () => {
+      if (video.currentTime <= 0.05) showPoster();
+    });
+    video.addEventListener("ended", () => {
+      video.currentTime = 0;
+      showPoster();
+    });
+
+    // Capture first frame once metadata is ready
+    const capture = async () => {
+      try {
+        // Ensure we have a frame to draw.
+        if (video.readyState < 2) return;
+
+        // Seek to the very beginning (some browsers need a tiny offset)
+        const t = Math.min(0.02, Math.max(0, (video.duration || 0) * 0));
+        if (Number.isFinite(video.duration) && video.duration > 0) {
+          video.currentTime = t;
+          await new Promise((res) => video.addEventListener("seeked", res, { once: true }));
+        }
+
+        const w = Math.max(2, Math.floor(video.videoWidth || 0));
+        const h = Math.max(2, Math.floor(video.videoHeight || 0));
+        if (w < 2 || h < 2) return;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        ctx.drawImage(video, 0, 0, w, h);
+        img.src = canvas.toDataURL("image/jpeg", 0.78);
+        showPoster();
+      } catch {
+        // If capture fails (CORS/decoder), fall back to default video rendering.
+        img.remove();
+      }
+    };
+
+    video.addEventListener("loadeddata", capture, { once: true });
+    // Trigger loading enough data for first frame
+    try {
+      video.load();
+    } catch {
+      // ignore
+    }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initMobileMenu();
@@ -1363,5 +1436,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmartContact();
   initGalleryFilters();
   initOfficeViewerLinks();
+  initVideoFirstFramePosters();
 });
 
