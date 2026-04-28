@@ -1331,6 +1331,21 @@ function initGalleryFilters() {
   setActive("all");
 }
 
+function initOfficeViewerLinks() {
+  const links = Array.from(document.querySelectorAll("[data-office-viewer]"));
+  if (links.length === 0) return;
+
+  // Turn relative file link into Office viewer link using current origin
+  for (const a of links) {
+    const rawHref = a.getAttribute("href") || "";
+    if (!rawHref || /^https?:\/\//i.test(rawHref)) continue;
+
+    const abs = new URL(rawHref, window.location.href).toString();
+    const viewer = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(abs)}`;
+    a.setAttribute("href", viewer);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initMobileMenu();
@@ -1347,5 +1362,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initDiagnosticQuiz();
   initSmartContact();
   initGalleryFilters();
+  initOfficeViewerLinks();
 });
 
