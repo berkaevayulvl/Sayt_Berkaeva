@@ -8,6 +8,26 @@
       name="description"
       content="Портфолио Юлии Беркаевой: нейросети, обучение, внедрение, вайб‑кодинг и digital‑проекты."
     />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        base-uri 'self';
+        object-src 'none';
+        frame-ancestors 'none';
+        img-src 'self' data: https:;
+        media-src 'self';
+        font-src 'self' https://fonts.gstatic.com;
+        style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+        script-src 'self' https://cdn.jsdelivr.net;
+        connect-src 'self';
+        upgrade-insecure-requests
+      "
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,8 +69,12 @@
         <nav class="nav" id="site-nav" aria-label="Навигация">
           <a class="nav__link cursor-target" href="#directions">2 направления</a>
           <a class="nav__link cursor-target" href="#ai">Нейросети</a>
+          <a class="nav__link cursor-target" href="#bots">Боты и агенты</a>
           <a class="nav__link cursor-target" href="#vibe">Вайб‑кодинг</a>
           <a class="nav__link cursor-target" href="#projects">Проекты</a>
+          <a class="nav__link cursor-target" href="#social">Соцсети</a>
+          <a class="nav__link cursor-target" href="#video">Видео</a>
+          <a class="nav__link cursor-target" href="#visual">Визуал</a>
           <a class="nav__link nav__cta cursor-target" href="#contact">Связаться</a>
         </nav>
       </div>
@@ -145,32 +169,101 @@
               </ul>
             </article>
           </div>
+
+          <div class="doc-row">
+            <article class="glass-card doc-card" data-animate>
+              <div class="badge">Презентация</div>
+              <h3 class="h3">Пример: алгоритм работы с партнёром (соцсети)</h3>
+              <p class="muted">Файл из папки <strong>соц сети</strong>. Можно скачать и открыть локально.</p>
+              <div class="doc-card__actions">
+                <a
+                  class="btn btn--ghost cursor-target"
+                  href="соц%20сети/пример%20алгоритма%20%20работы%20с%20партнером.pptx"
+                  download
+                >
+                  Скачать .pptx
+                </a>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="section works" id="works">
+      <section class="section bots" id="bots">
         <div class="container">
           <div class="section__head" data-animate>
-            <h2 class="h2">Избранные работы (нейросети)</h2>
-            <p class="muted">Детали некоторых проектов — с учётом NDA.</p>
+            <h2 class="h2">Боты и ИИ‑агенты под ваш запрос</h2>
+            <p class="muted">
+              Я не продаю “одного универсального бота”. Я собираю сценарий под вашу задачу, согласую логику и метрики, затем делаю
+              прототип и довожу до стабильной работы.
+            </p>
           </div>
 
-          <div class="cards-4">
-            <article class="glass-card work-card" data-animate>
-              <div class="badge">Обучение</div>
-              <h3 class="h3">Курс для маркетологов</h3>
+          <div class="grid-3">
+            <article class="glass-card bot-card" data-animate>
+              <div class="badge">Продажи</div>
+              <h3 class="h3">Агент мониторинга воронки</h3>
+              <p class="muted">Анализ этапов сделки, выявление зон максимальных потерь, отчёты по менеджерам.</p>
+              <ul class="list">
+                <li>конверсия по этапам и причинам отказов</li>
+                <li>скорость реакции и “зависшие” лиды</li>
+                <li>рекомендации по улучшению сценариев</li>
+              </ul>
             </article>
-            <article class="glass-card work-card" data-animate>
-              <div class="badge">Автоматизация</div>
-              <h3 class="h3">Бот для заявок</h3>
+
+            <article class="glass-card bot-card" data-animate>
+              <div class="badge">Услуги</div>
+              <h3 class="h3">Запись и напоминания</h3>
+              <p class="muted">Запись клиентов, подтверждение, перенос, напоминания и сбор обратной связи.</p>
+              <ul class="list">
+                <li>первичная диагностика перед записью</li>
+                <li>напоминание за 24ч/2ч</li>
+                <li>снижение неявок и рост повторных визитов</li>
+              </ul>
             </article>
-            <article class="glass-card work-card" data-animate>
-              <div class="badge">Вайбкодинг</div>
-              <h3 class="h3">Внутренний дашборд</h3>
+
+            <article class="glass-card bot-card" data-animate>
+              <div class="badge">Поддержка</div>
+              <h3 class="h3">FAQ + маршрутизация обращений</h3>
+              <p class="muted">Отвечает на типовые вопросы, собирает детали и направляет запрос нужному специалисту.</p>
+              <ul class="list">
+                <li>экономит время команды</li>
+                <li>структурирует заявки</li>
+                <li>контроль SLA и причины обращений</li>
+              </ul>
             </article>
-            <article class="glass-card work-card" data-animate>
-              <div class="badge">Стратегия</div>
-              <h3 class="h3">Дорожная карта ИИ</h3>
+
+            <article class="glass-card bot-card" data-animate>
+              <div class="badge">Контент</div>
+              <h3 class="h3">Агент контент‑плана</h3>
+              <p class="muted">Рубрики, идеи, сценарии, адаптация под площадки и tone of voice. План + KPI.</p>
+              <ul class="list">
+                <li>контент‑матрица и календарь</li>
+                <li>шаблоны постов/сторис</li>
+                <li>оценка гипотез по вовлечению</li>
+              </ul>
+            </article>
+
+            <article class="glass-card bot-card" data-animate>
+              <div class="badge">HR</div>
+              <h3 class="h3">Предскрининг кандидатов</h3>
+              <p class="muted">Сбор ответов, проверка требований, короткое резюме для рекрутера.</p>
+              <ul class="list">
+                <li>единый формат интервью</li>
+                <li>красные флаги и риски</li>
+                <li>быстрее закрывается вакансия</li>
+              </ul>
+            </article>
+
+            <article class="glass-card bot-card" data-animate>
+              <div class="badge">Операционка</div>
+              <h3 class="h3">Агент задач и регламентов</h3>
+              <p class="muted">Чек‑листы, статусы, напоминания и сводки для руководителя.</p>
+              <ul class="list">
+                <li>контроль исполнения</li>
+                <li>прозрачность работы команды</li>
+                <li>отчёты без ручной рутины</li>
+              </ul>
             </article>
           </div>
         </div>
@@ -232,6 +325,238 @@
               <div class="badge">Concept</div>
               <h3 class="h3">Concept Site for AI Creator</h3>
             </article>
+            <article class="glass-card project-card" data-animate>
+              <div class="badge">Game · GitHub Pages</div>
+              <h3 class="h3">Тетрис — браузерная игра</h3>
+              <p class="muted" style="margin: 0 0 12px">Игра запускается в браузере. Управление: ← →, ↑ / Z, ↓, пробел.</p>
+              <div class="doc-card__actions">
+                <a
+                  class="btn btn--primary cursor-target"
+                  href="https://berkaevayulvl.github.io/game_new-/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Играть
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section social" id="social">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Пример: работа с соцсетями</h2>
+            <p class="muted">Как выглядит процесс — от входных данных до постинга, аналитики и партнёрских коллабораций.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="glass-card" data-animate>
+              <div class="badge">SMM / контент</div>
+              <h3 class="h3">Контент‑план и упаковка</h3>
+              <ul class="list">
+                <li>аудит: позиционирование, УТП, визуальная логика</li>
+                <li>контент‑матрица: рубрики, форматы, темы</li>
+                <li>шаблоны: сторис/посты, единый стиль</li>
+                <li>CTA и прогрев: сценарии перехода к заявке</li>
+              </ul>
+            </article>
+
+            <article class="glass-card" data-animate>
+              <div class="badge">Партнёрства</div>
+              <h3 class="h3">Алгоритм работы с партнёром</h3>
+              <p class="muted" style="margin: 0 0 12px">
+                Подготовка оффера, договорённости, совместный контент и фиксация результата.
+              </p>
+              <div class="doc-card__actions">
+                <a
+                  class="btn btn--primary cursor-target"
+                  href="соц%20сети/пример%20алгоритма%20%20работы%20с%20партнером.pptx"
+                  download
+                >
+                  Открыть презентацию
+                </a>
+                <a class="btn btn--ghost cursor-target" href="#contact">Запросить сотрудничество</a>
+              </div>
+              <div class="muted" style="margin-top: 10px; font-size: 13px">
+                Метрики, которые обычно фиксируем: охват, ER, клики, заявки, стоимость контакта.
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section media" id="video">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Видео</h2>
+            <p class="muted">Небольшая подборка визуальных фрагментов — можно смотреть прямо на странице.</p>
+          </div>
+
+          <div class="media-grid media-grid--video">
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video
+                  class="media-card__video"
+                  controls
+                  preload="metadata"
+                  poster="визуал/нейрофотосессии/пустыня%20(1).webp"
+                  playsinline
+                >
+                  <source src="видео/дети.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">Дети</figcaption>
+            </figure>
+
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video class="media-card__video" controls preload="metadata" poster="визуал/нейрофотосессии/5.jpg" playsinline>
+                  <source src="видео/утро.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">Утро</figcaption>
+            </figure>
+
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video class="media-card__video" controls preload="metadata" poster="визуал/нейрофотосессии/пчеловод.png" playsinline>
+                  <source src="видео/цветы.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">Цветы</figcaption>
+            </figure>
+
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video class="media-card__video" controls preload="metadata" poster="визуал/нейрофотосессии/4.jpg" playsinline>
+                  <source src="видео/киты.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">Киты</figcaption>
+            </figure>
+
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video class="media-card__video" controls preload="metadata" poster="визуал/нейрофотосессии/4%20кошки.png" playsinline>
+                  <source src="видео/гном.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">Гном</figcaption>
+            </figure>
+
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video class="media-card__video" controls preload="metadata" poster="визуал/нейрофотосессии/дракон%201.webp" playsinline>
+                  <source src="видео/дракон.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">Дракон</figcaption>
+            </figure>
+
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video class="media-card__video" controls preload="metadata" poster="визуал/нейрофотосессии/4%20дракона.webp" playsinline>
+                  <source src="видео/дайвер%20с%20акулой%203.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">Дайвер с акулой</figcaption>
+            </figure>
+
+            <figure class="glass-card media-card" data-animate>
+              <div class="media-card__frame">
+                <video
+                  class="media-card__video"
+                  controls
+                  preload="metadata"
+                  poster="визуал/нейрофотосессии/3%20совы%20и%20девушка%20в%20лесу.png"
+                  playsinline
+                >
+                  <source src="видео/NyraNeyl%20210326%20серия.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="media-card__caption">NyraNeyl</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section media" id="visual">
+        <div class="container">
+          <div class="section__head" data-animate>
+            <h2 class="h2">Визуал · нейрофотосессии</h2>
+            <p class="muted">Галерея работ из папки <strong>визуал/нейрофотосессии</strong>.</p>
+          </div>
+
+          <div class="filters" data-gallery-filters data-animate>
+            <button class="filter-chip cursor-target is-active" type="button" data-filter="all">Все</button>
+            <button class="filter-chip cursor-target" type="button" data-filter="fantasy">Фэнтези</button>
+            <button class="filter-chip cursor-target" type="button" data-filter="animals">Животные</button>
+            <button class="filter-chip cursor-target" type="button" data-filter="nature">Природа/пейзажи</button>
+            <button class="filter-chip cursor-target" type="button" data-filter="people">Люди/портрет</button>
+          </div>
+
+          <div class="media-grid media-grid--images" data-gallery-grid>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/4.jpg" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/4.jpg" alt="Нейрофотосессия — 4" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/5.jpg" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/5.jpg" alt="Нейрофотосессия — 5" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="nature" href="визуал/нейрофотосессии/пустыня%20(1).webp" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/пустыня%20(1).webp" alt="Нейрофотосессия — пустыня 1" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="nature" href="визуал/нейрофотосессии/пустыня%20(2).webp" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/пустыня%20(2).webp" alt="Нейрофотосессия — пустыня 2" loading="lazy" />
+            </a>
+            <a
+              class="glass-card media-thumb cursor-target"
+              data-cat="fantasy people"
+              href="визуал/нейрофотосессии/3%20совы%20и%20девушка%20в%20лесу.png"
+              target="_blank"
+              rel="noreferrer"
+              data-animate
+            >
+              <img
+                class="media-thumb__img"
+                src="визуал/нейрофотосессии/3%20совы%20и%20девушка%20в%20лесу.png"
+                alt="Нейрофотосессия — 3 совы и девушка в лесу"
+                loading="lazy"
+              />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="animals" href="визуал/нейрофотосессии/4%20кошки.png" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/4%20кошки.png" alt="Нейрофотосессия — 4 кошки" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/пчеловод.png" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/пчеловод.png" alt="Нейрофотосессия — пчеловод" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/деревенский%20обед.png" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/деревенский%20обед.png" alt="Нейрофотосессия — деревенский обед" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/Gemini_Generated_Image_tel860tel860tel8.png" target="_blank" rel="noreferrer" data-animate>
+              <img
+                class="media-thumb__img"
+                src="визуал/нейрофотосессии/Gemini_Generated_Image_tel860tel860tel8.png"
+                alt="Нейрофотосессия — Gemini generated"
+                loading="lazy"
+              />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/FACE%20REFERENCE%20№1.png" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/FACE%20REFERENCE%20№1.png" alt="Нейрофотосессия — Face reference" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/ДЗ%201_1.png" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/ДЗ%201_1.png" alt="Нейрофотосессия — ДЗ 1_1" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="people" href="визуал/нейрофотосессии/ДЗ%201_2.png" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/ДЗ%201_2.png" alt="Нейрофотосессия — ДЗ 1_2" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="fantasy" href="визуал/нейрофотосессии/4%20дракона.webp" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/4%20дракона.webp" alt="Нейрофотосессия — 4 дракона" loading="lazy" />
+            </a>
+            <a class="glass-card media-thumb cursor-target" data-cat="fantasy" href="визуал/нейрофотосессии/дракон%201.webp" target="_blank" rel="noreferrer" data-animate>
+              <img class="media-thumb__img" src="визуал/нейрофотосессии/дракон%201.webp" alt="Нейрофотосессия — дракон 1" loading="lazy" />
+            </a>
           </div>
         </div>
       </section>
@@ -304,6 +629,105 @@
               </div>
             </div>
           </div>
+
+          <div class="smart-contact glass-card" data-animate>
+            <h3 class="h3">Умная заявка (чтобы сразу было понятно, что нужно)</h3>
+            <p class="muted" style="margin: 0 0 12px">
+              Заполните 5 полей — и получите готовое сообщение с краткими рекомендациями. Данные не отправляются автоматически: вы сами
+              нажимаете “Отправить”.
+            </p>
+
+            <form class="smart-form" data-smart-contact>
+              <div class="smart-form__grid">
+                <label class="smart-field">
+                  <span class="smart-field__label">Имя</span>
+                  <input class="smart-field__control" name="name" autocomplete="name" placeholder="Как к вам обращаться" />
+                </label>
+
+                <label class="smart-field">
+                  <span class="smart-field__label">Кто вы</span>
+                  <select class="smart-field__control" name="who" required>
+                    <option value="" selected disabled>Выберите…</option>
+                    <option>Частное лицо / самозанятый</option>
+                    <option>Представитель компании (ИП / ООО)</option>
+                    <option>Руководитель команды внутри организации</option>
+                  </select>
+                </label>
+
+                <label class="smart-field">
+                  <span class="smart-field__label">Цель</span>
+                  <select class="smart-field__control" name="goal" required>
+                    <option value="" selected disabled>Выберите…</option>
+                    <option>Научиться стабильно работать с нейросетями</option>
+                    <option>Автоматизировать рутину или процессы</option>
+                    <option>Собрать продукт / инструмент на базе ИИ</option>
+                    <option>Понять, куда внедрять ИИ в бизнесе стратегически</option>
+                    <option>Сайт / лендинг / портфолио (вайб‑кодинг)</option>
+                    <option>Соцсети / контент / партнёрства</option>
+                  </select>
+                </label>
+
+                <label class="smart-field">
+                  <span class="smart-field__label">Срок</span>
+                  <select class="smart-field__control" name="deadline">
+                    <option>Не срочно</option>
+                    <option>1–2 недели</option>
+                    <option>До 1 месяца</option>
+                    <option>Срочно (3–7 дней)</option>
+                  </select>
+                </label>
+
+                <label class="smart-field smart-field--full">
+                  <span class="smart-field__label">Коротко о задаче</span>
+                  <textarea
+                    class="smart-field__control smart-field__control--area"
+                    name="details"
+                    rows="4"
+                    placeholder="Что нужно сделать? Для кого? Ссылки/пример/референсы — можно сюда."
+                    required
+                  ></textarea>
+                </label>
+
+                <label class="smart-check smart-field--full">
+                  <input class="smart-check__box" type="checkbox" name="consent" required />
+                  <span class="muted"
+                    >Согласен(на) на обработку персональных данных для ответа на обращение. Подробнее — в
+                    <a class="cursor-target" href="#privacy">политике</a>.</span
+                  >
+                </label>
+              </div>
+
+              <div class="smart-actions">
+                <a class="btn btn--primary cursor-target" data-smart-tg href="https://t.me/Yuliya_Berkaeva" target="_blank" rel="noreferrer"
+                  >Отправить в Telegram</a
+                >
+                <a class="btn btn--ghost cursor-target" data-smart-mail href="mailto:BerkaevaYulVl@gmail.com">Отправить на почту</a>
+                <button class="btn-like cursor-target" type="button" data-smart-copy>Скопировать текст</button>
+              </div>
+
+              <details class="smart-preview" data-smart-preview>
+                <summary class="smart-preview__summary cursor-target">Показать текст, который будет отправлен</summary>
+                <pre class="smart-preview__box" data-smart-text></pre>
+              </details>
+            </form>
+          </div>
+
+          <section class="section privacy" id="privacy" aria-label="Политика конфиденциальности">
+            <div class="glass-card">
+              <h3 class="h3">Персональные данные и конфиденциальность</h3>
+              <p class="muted" style="margin: 0 0 10px">
+                Этот сайт не собирает заявки на сервер и не хранит введённые данные. Сообщение формируется локально в вашем браузере и
+                отправляется только после вашего действия (Telegram/почта).
+              </p>
+              <ul class="list" style="margin-top: 0">
+                <li>Цель обработки: ответ на обращение, подготовка предложения, уточнение требований.</li>
+                <li>Состав данных: имя, контакт и описание задачи (которое вы сами введёте).</li>
+                <li>Передача третьим лицам: отсутствует, кроме выбранного вами канала связи (почтовый клиент/Telegram).</li>
+                <li>Срок: до завершения коммуникации по обращению, далее — по запросу удаляется из переписки.</li>
+                <li>Контакт оператора: <a class="cursor-target" href="mailto:BerkaevaYulVl@gmail.com">BerkaevaYulVl@gmail.com</a>.</li>
+              </ul>
+            </div>
+          </section>
         </div>
       </section>
     </main>

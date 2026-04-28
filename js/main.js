@@ -698,6 +698,124 @@ function buildRecommendation(answers) {
   return { primary, need, services: Array.from(new Set(services)) };
 }
 
+function buildSmartContactText({ name, who, goal, deadline, details }) {
+  const safe = (v) => String(v || "").replace(/\s+/g, " ").trim();
+  const nl = "\n";
+
+  const baseAnswers = {
+    who: safe(who),
+    goal: safe(goal),
+    exp: "", // optional in this quick form
+    format: "",
+    tech: "",
+  };
+  const rec = buildRecommendation(baseAnswers);
+
+  const parts = [];
+  parts.push("Заявка с сайта");
+  if (safe(name)) parts.push(`Имя: ${safe(name)}`);
+  if (safe(who)) parts.push(`Кто: ${safe(who)}`);
+  if (safe(goal)) parts.push(`Цель: ${safe(goal)}`);
+  if (safe(deadline)) parts.push(`Срок: ${safe(deadline)}`);
+  parts.push("");
+  parts.push("Описание задачи:");
+  parts.push(safe(details));
+  parts.push("");
+  parts.push("Авто‑ориентир (по ответам):");
+  parts.push(`- Рекомендация: ${rec.primary}`);
+  parts.push(`- Что важно: ${rec.need}`);
+  if (Array.isArray(rec.services) && rec.services.length) {
+    parts.push("- Возможные форматы:");
+    for (const s of rec.services.slice(0, 6)) parts.push(`  • ${s}`);
+  }
+  parts.push("");
+  parts.push("Чтобы я быстро оценил(а) объём, можно ответить 2 строками:");
+  parts.push("1) Есть ли примеры/референсы (ссылки)?");
+  parts.push("2) Какой результат считаете “готово”?");
+
+  return parts.join(nl);
+}
+
+function initSmartContact() {
+  const form = document.querySelector("[data-smart-contact]");
+  if (!form) return;
+
+  const email = "BerkaevaYulVl@gmail.com";
+  const tgUsername = "Yuliya_Berkaeva";
+
+  const el = (name) => form.querySelector(`[name="${name}"]`);
+  const textBox = form.querySelector("[data-smart-text]");
+  const linkMail = form.querySelector("[data-smart-mail]");
+  const linkTg = form.querySelector("[data-smart-tg]");
+  const btnCopy = form.querySelector("[data-smart-copy]");
+
+  const compute = () => {
+    const payload = {
+      name: el("name")?.value,
+      who: el("who")?.value,
+      goal: el("goal")?.value,
+      deadline: el("deadline")?.value,
+      details: el("details")?.value,
+    };
+
+    const text = buildSmartContactText(payload);
+    if (textBox) textBox.textContent = text;
+
+    const subject = "Заявка с сайта — Юлия Беркаева";
+    const mailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+    if (linkMail) linkMail.setAttribute("href", mailto);
+
+    // Share URL variant is more compatible across devices
+    const tgHref = `https://t.me/share/url?url=${encodeURIComponent("https://example.com")}&text=${encodeURIComponent(text)}`;
+
+    // Prefer direct chat link with text where supported, fallback to share/url (keeps very long texts working)
+    const direct = `https://t.me/${encodeURIComponent(tgUsername)}?text=${encodeURIComponent(text)}`;
+    if (linkTg) linkTg.setAttribute("href", direct.length < 1800 ? direct : tgHref);
+  };
+
+  const requiredOk = () => {
+    const who = el("who")?.value;
+    const goal = el("goal")?.value;
+    const details = el("details")?.value;
+    const consent = el("consent")?.checked;
+    return Boolean(who && goal && String(details || "").trim().length > 0 && consent);
+  };
+
+  const updateDisabled = () => {
+    const ok = requiredOk();
+    if (linkMail) linkMail.toggleAttribute("aria-disabled", !ok);
+    if (linkTg) linkTg.toggleAttribute("aria-disabled", !ok);
+  };
+
+  compute();
+  updateDisabled();
+
+  form.addEventListener("input", () => {
+    compute();
+    updateDisabled();
+  });
+
+  form.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    if (a.matches("[data-smart-mail], [data-smart-tg]") && !requiredOk()) {
+      e.preventDefault();
+      alert("Заполните поля: Кто вы, Цель, Описание задачи и поставьте согласие на обработку данных.");
+    }
+  });
+
+  btnCopy?.addEventListener("click", async () => {
+    const text = textBox?.textContent || "";
+    try {
+      await navigator.clipboard.writeText(text);
+      btnCopy.textContent = "Скопировано";
+      window.setTimeout(() => (btnCopy.textContent = "Скопировать текст"), 1200);
+    } catch {
+      alert("Не получилось скопировать автоматически. Вы можете выделить текст в блоке предпросмотра и скопировать вручную.");
+    }
+  });
+}
+
 function initDiagnosticQuiz() {
   const root = document.getElementById("diagnostic-app");
   if (!root) return;
@@ -1182,6 +1300,37 @@ function initCardSpringHover() {
   }
 }
 
+function initGalleryFilters() {
+  const host = document.querySelector("[data-gallery-filters]");
+  const grid = document.querySelector("[data-gallery-grid]");
+  if (!host || !grid) return;
+
+  const chips = Array.from(host.querySelectorAll("[data-filter]"));
+  const items = Array.from(grid.querySelectorAll("[data-cat]"));
+  if (chips.length === 0 || items.length === 0) return;
+
+  const setActive = (key) => {
+    for (const c of chips) c.classList.toggle("is-active", c.getAttribute("data-filter") === key);
+    for (const el of items) {
+      const cats = String(el.getAttribute("data-cat") || "")
+        .split(/\s+/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      const show = key === "all" ? true : cats.includes(key);
+      el.classList.toggle("is-hidden", !show);
+    }
+  };
+
+  host.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-filter]");
+    if (!btn) return;
+    const key = btn.getAttribute("data-filter") || "all";
+    setActive(key);
+  });
+
+  setActive("all");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initMobileMenu();
@@ -1196,5 +1345,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMagneticButtons();
   initCardSpringHover();
   initDiagnosticQuiz();
+  initSmartContact();
+  initGalleryFilters();
 });
 
